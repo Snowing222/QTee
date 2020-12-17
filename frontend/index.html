@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row ustify-content-evenly">
+            <div id="tshirt-div" class="col-8">
+
+                <img id="tshirt-backgroundpicture" src="tshirt.png" width="700px" />
+
+                <div id="drawingArea" class="drawing-area">
+                    <div class="canvas-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id='tshirt-design-wrapper' class="col">
+
+                <div class="controls">
+                    <p>
+                        <label for="tshirt-size">Select a size:</label>
+                        <select namd="tshirt-size" id="tshirt-size">
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                        </select>
+                    </p>
+                </div>
+
+                <div class="controls">
+                    <p>
+                        <label for="tshirt-color">T-Shirt Color:</label>
+                        <select id="tshirt-color">
+                            <option value="#fff">White</option>
+                            <option value="#000">Black</option>
+                            <option value="#f00">Red</option>
+                            <option value="#008000">Green</option>
+                            <option value="#ff0">Yellow</option>
+                        </select>
+                    </p>
+                </div>
+
+                <div class="controls">
+                    <p>
+                        <button id="addTextButton">Add Text</button>
+                        <p class='hidden font'>Select Font <select id="font-family"></select></p>
+                    </p>
+                </div>
+
+                <div class="controls">
+                    <p>
+                        <button id="addShape">Add Shape</button>
+                        <p class='hidden shape'>
+                            <button type="button" class="btn circle" onclick="addCircle()">Circle</button>
+                            <button type="button" class="btn triangle" onclick="addTriangle()">Triangle</button>
+                            <button type="button" class="btn line" onclick="addLine()">Line</button>
+                            <button type="button" class="btn rect" onclick="addRect()">Rectangle</button>
+                            <button type="button" class="btn polygon" onclick="addPolygon()">Polygon</button>
+                          </p>
+                    </p>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+    <script src='./lib/fabric.min.js'></script>
+    <script src="dom-to-image.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+    <script src='font.js'></script>
+    <script src='index.js'></script>
+</body>
+
+</html>

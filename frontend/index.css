@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Big+Shoulders+Inline+Text:wght@900&family=Bungee+Outline&family=Dancing+Script:wght@500&family=Indie+Flower&family=JetBrains+Mono:ital,wght@1,300&family=Lobster&family=Orbitron:wght@500&family=Righteous&family=Roboto&family=Sacramento&family=Special+Elite&display=swap');
+
+.container{
+    padding-top:100px;
+}
+.drawing-area{
+    position: absolute;
+    top: 120px;
+    left: 180px;
+    z-index: 10;
+
+}
+
+.canvas-container{
+    position: relative; 
+    user-select: none;
+}
+
+#tshirt-div{
+    width: 700px;
+    position: relative;
+    background-color:white;
+}
+
+#canvas{
+    position: absolute;
+    left: 0px; 
+    top: 0px; 
+    user-select: none; 
+    cursor: default;
+}
+
+#tshirt-design-wrapper{
+    padding-top: 50px;
+    padding-left: 100px
+
+}
+
+#tshirt-backgroundpicture{
+    left:-20px;
+}
+
+.hidden{
+    visibility: hidden;
+}
