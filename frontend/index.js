@@ -120,6 +120,48 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
 
+    const openModalButtons = document.querySelectorAll('[data-modal-target]')
+    const overlay = document.getElementById('overlay')
+    const closeModalButtons = document.querySelectorAll('[data-close-button]')
+
+
+   
+    function openModal(modal){
+        if(modal==null) return
+        modal.classList.add('active')
+        overlay.classList.add('active')
+    }
+
+    function closeModal(modal){
+        if(modal==null) return
+        modal.classList.remove('active')
+        overlay.classList.remove('active')
+    }
+
+    overlay.addEventListener('click',()=>{
+        const modal = document.querySelector('.model.active')
+        closeModal(modal)
+        })
+    
+
+    openModalButtons.forEach(button=>{
+        button.addEventListener('click', ()=>{
+            const modal = document.querySelector(button.dataset.modalTarget)
+            openModal(modal)
+        })
+    })
+
+    closeModalButtons.forEach(button=>{
+        button.addEventListener('click', (e) => {
+            e.preventDefault()
+            const modal = button.closest('.model')
+            closeModal(modal)
+
+        })
+        
+    })
+
+
     let tshirtForm = document.getElementById("tshirtForm")
     tshirtForm.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -139,43 +181,27 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         
         // pop up userform
-        const model = document.getElementById('model')
-        const overlay = document.getElementById('overlay')
-        const closeButton = document.querySelector('[data-close-button]')
+        const modal = document.getElementById('model')
+        openModal(modal)
 
-
-        model.classList.add('active')
-        overlay.classList.add('active')
-
-        // add eventlistener to close userform
-
-        closeButton.addEventListener('click', (e) => {
-            e.preventDefault()
-            model.classList.remove('active')
-            overlay.classList.remove('active')
-
-        })
-        // below doesnt work also
-
-        // let p = document.createElement('p').innerHTML='whyyyy???'
-
-        // document.getElementById("model").appendChild(p)
-
+    
+        
         let userForm = document.getElementById('userForm')
 
         userForm.addEventListener('submit', userFormSubmission)
 
         function userFormSubmission(e) {
             e.preventDefault()
+            closeModal(modal)
+            
             let email = document.getElementById('email').value
 
             let userformData = {
                 email: email,
-                tshirt: {
+                tshirts_attributes: {
                     size: size,
                     color: color,
                     img_src: img_src
-  
                 }
             }
 
@@ -189,16 +215,75 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             fetch(`${BASE_URL}/users`, configObj)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (object) {
-                    console.log(object);
-                });
+                .then(resp=>resp.json())
+                .then(json=>confirmSaved(json));
+
+            function confirmSaved(json){
+                let div = document.createElement('div')
+                div.classList.add('model')
+                let body = document.querySelector('body')
+                
+
+                div.innerHTML = 
+                `
+                <div class="model-header">
+                    <div class="title">Hi ${json.email} <br>
+                    Your image is saved! <br>
+                    Click here to see all your Tshirt</div>
+                    <button data-close-button class='close-button' id='button-1'>&times;</button>
+                </div>
+                
+
+                `
+
+                body.appendChild(div)
+                openModal(div)
+                let button = document.getElementById('button-1')
+                button.addEventListener('click',(e)=>{
+                    e.preventDefault()
+                    div.classList.remove('active')
+                    overlay.classList.remove('active')
+                    
+                }
+                )
+        
+            }
 
         }
 
     })
+
+    let gallaryButton = document.getElementById('gallary')
+    gallaryButton.addEventListener('click', ()=>{
+        fetchTshirts()
+        let gallary_container = document.getElementById('gallary_container')
+        gallary_container.classList.add('active')
+        overlay.classList.add('active')
+    
+        // document.addEventListener('click',()=>{
+    
+        //     gallary_container.classList.remove('active')
+        //     overlay.classList.remove('active')
+          
+
+        // })
+    
+    })
+
+    function fetchTshirts(){
+        fetch(`${BASE_URL}/tshirts`)
+        .then(resp=>resp.json())
+        .then(json=>displayTshirts(json))
+    }
+
+    function displayTshirts(json){
+        for(const t of json){
+            let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
+            tshirt.displayTshirt()
+        }
+    }
+
+    
 
 
 

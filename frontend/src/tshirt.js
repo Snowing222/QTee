@@ -5,4 +5,15 @@ class Tshirt{
         this.color = color
         this.img_src = img_src     
     }
+
+    displayTshirt(){
+        let gallary = document.getElementById('gallary_container')
+        gallary.innerHTML +=
+        `
+        <div class='card'>
+        <img src=${this.img_src} id=image${this.id}>
+        </div>
+        `
+    }
+
 }
