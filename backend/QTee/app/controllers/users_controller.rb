@@ -19,9 +19,10 @@ class UsersController < ApplicationController
     
     @user = User.find_or_create_by(email: user_params[:email])
     @tshirt = @user.tshirts.create(size: user_params[:tshirts_attributes][:size], color: user_params[:tshirts_attributes][:color], img_src: user_params[:tshirts_attributes][:img_src])
-
-    if @user.save
-      render json: @user, status: :created, location: @user
+ 
+    if @user
+      # render json: @user, status: :created, location: @user
+      render json: { user_email: @user.email, tshirt_size: @tshirt.size, tshirt_color:@tshirt.color, tshirt_img:@tshirt.img_src }
     else
       render json: @user.errorse_entity
     end

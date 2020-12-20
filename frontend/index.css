@@ -41,7 +41,7 @@
 }
 
 .hidden{
-    visibility: hidden;
+    display: none;
 }
 
 .model {
@@ -104,17 +104,27 @@
 }
 
 #gallary_container{
+    position: absolute;
     width:100%;
     height:100%;
     background-color: aliceblue;
     display: flex;
     flex-wrap: wrap;
     padding-left: 0;
+    justify-content: space-between;
+    overflow:auto; 
 }
 
 .card{
-    float: left;
-    position: relative;
-    flex: 25%; 
+    width: 250px;
+    height:300px;
+    padding:20px;
+    margin:20px;
 
+
+}
+
+span{
+    color: red;
+    font-weight: bold;
 }

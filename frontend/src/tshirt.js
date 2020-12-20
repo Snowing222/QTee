@@ -11,7 +11,7 @@ class Tshirt{
         gallary.innerHTML +=
         `
         <div class='card'>
-        <img src=${this.img_src} id=image${this.id}>
+        <img src=${this.img_src} id=image${this.id} width='208px' height='258px'>
         </div>
         `
     }

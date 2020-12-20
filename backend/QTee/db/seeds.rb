@@ -7,5 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 User.delete_all
 Tshirt.delete_all
-elsa = User.create(email:"elsa@gmail.com")
-elsa.tshirts.create(size:"X", color:"white", img_src:"https://imgur.com/BkRNH5R")
+
