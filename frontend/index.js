@@ -9,15 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
+
+
     const canvas = initCanvas('canvas')
     canvas.renderAll()
+    console.log(canvas, canvas.isDrawingMode)
+    //edit tshirt color
+    let tshirtColor = document.getElementById("tshirt-color")
+    tshirtColor.addEventListener('change', (e) => {
+        document.getElementById("tshirt-backgroundpicture").style.backgroundColor = tshirtColor.value
+    })
 
-     //edit tshirt color
-     let tshirtColor = document.getElementById("tshirt-color")
-     tshirtColor.addEventListener('change', (e) => {
-         document.getElementById("tshirt-backgroundpicture").style.backgroundColor = tshirtColor.value
-     })
- 
 
     //add textbox/font function
     let fonts = ['Abril Fatface',
@@ -82,92 +84,110 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
 
+    document.getElementById('drawbutton').addEventListener('click', toggleMode)
 
-   //add shapes
-    document.getElementById('addShape').addEventListener('click', (e) => {
-        document.querySelector('p.hidden.shape').classList.remove('hidden')
+    function toggleMode(e) {
+    if (e.target.innerText === "Switch To Dawing Mode") {
+        canvas.isDrawingMode = true
+        e.target.innerText = "Drawing Mode"
+        console.log(canvas, canvas.isDrawingMode)
 
-    })
-
-    document.querySelector('button.btn.circle').addEventListener('click', () => {
-        canvas.add(new fabric.Circle({
-            radius: 40,
-            left: 50,
-            top: 50,
-            fill: 'rgb(0,255,0)',
-            opacity: 0.5
-        }));
-    })
-
-    document.querySelector('button.btn.triangle').addEventListener('click', () => {
-        canvas.add(new fabric.Triangle({
-            width: 50,
-            height: 40,
-            fill: 'blue',
-            left: 50,
-            top: 50
-        }));
-    })
-
-    document.querySelector('button.btn.rect').addEventListener('click', () => {
-        canvas.add(new fabric.Rect({
-            width: 50,
-            height: 50,
-            left: 50,
-            top: 50,
-            fill: 'rgb(255,0,0)'
-        }));
-    })
-
-
-
-
-    const openModalButtons = document.querySelectorAll('[data-modal-target]')
-    const overlay = document.getElementById('overlay')
-    const closeModalButtons = document.querySelectorAll('[data-close-button]')
-
-
-
-    function openModal(modal) {
-        if (modal == null) return
-        modal.classList.add('active')
-        overlay.classList.add('active')
+    } else {
+        canvas.isDrawingMode = false
+        e.target.innerText = "Switch To Dawing Mode"
+        console.log(canvas, canvas.isDrawingMode)
     }
+}
 
-    function closeModal(modal) {
-        if (modal == null) return
-        modal.classList.remove('active')
-        overlay.classList.remove('active')
-    }
+//add shapes
+document.getElementById('addShape').addEventListener('click', (e) => {
+    document.querySelector('p.hidden.shape').classList.remove('hidden')
 
-    overlay.addEventListener('click', () => {
-        const modal = document.querySelector('.model.active')
+})
+
+document.querySelector('button.btn.circle').addEventListener('click', () => {
+    canvas.add(new fabric.Circle({
+        radius: 40,
+        left: 50,
+        top: 50,
+        fill: 'rgb(0,255,0)',
+        opacity: 0.5
+    }));
+})
+
+document.querySelector('button.btn.triangle').addEventListener('click', () => {
+    canvas.add(new fabric.Triangle({
+        width: 50,
+        height: 40,
+        fill: 'blue',
+        left: 50,
+        top: 50
+    }));
+})
+
+document.querySelector('button.btn.rect').addEventListener('click', () => {
+    canvas.add(new fabric.Rect({
+        width: 50,
+        height: 50,
+        left: 50,
+        top: 50,
+        fill: 'rgb(255,0,0)'
+    }));
+})
+
+
+
+
+
+})
+
+
+
+const openModalButtons = document.querySelectorAll('[data-modal-target]')
+const overlay = document.getElementById('overlay')
+const closeModalButtons = document.querySelectorAll('[data-close-button]')
+console.log(openModalButtons, closeModalButtons)
+
+
+function openModal(modal) {
+    if (modal == null) return
+    modal.classList.add('active')
+    overlay.classList.add('active')
+}
+
+function closeModal(modal) {
+    if (modal == null) return
+    modal.classList.remove('active')
+    overlay.classList.remove('active')
+}
+
+overlay.addEventListener('click', () => {
+    const modal = document.querySelector('.model.active')
+    closeModal(modal)
+})
+
+
+openModalButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget)
+        openModal(modal)
+    })
+})
+
+closeModalButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        e.preventDefault()
+        const modal = button.closest('.model')
         closeModal(modal)
-    })
-
-
-    openModalButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget)
-            openModal(modal)
-        })
-    })
-
-    closeModalButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault()
-            const modal = button.closest('.model')
-            closeModal(modal)
-
-        })
 
     })
+
 
 
     let tshirtForm = document.getElementById("tshirtForm")
     tshirtForm.addEventListener('submit', (e) => {
-        e.preventDefault() 
-        
+        e.preventDefault()
+
         //save tshirt data
 
         let size = document.getElementById("tshirt-size").value
@@ -176,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let node = document.getElementById('tshirt-div');
         let img_src = ""
 
-         domtoimage.toPng(node)
+        domtoimage.toPng(node)
             .then(dataUrl => {
                 img_src = dataUrl
             })
@@ -263,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
-    
+
 
     let gallaryButton = document.getElementById('gallary')
     gallaryButton.addEventListener('click', () => {
