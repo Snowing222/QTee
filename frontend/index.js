@@ -167,16 +167,13 @@ function displayTshirts(json) {
 
 
 
-const openModalButtons = document.querySelectorAll('[data-modal-target]')
+// const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const overlay = document.getElementById('overlay')
-const closeModalButtons = document.querySelectorAll('[data-close-button]')
-
-
 
 function openModal(modal) {
     if (modal == null) return
     modal.classList.add('active')
-    overlay.classList.add('active')
+    overlay.classList.add('active')  
 }
 
 function closeModal(modal) {
@@ -191,21 +188,23 @@ overlay.addEventListener('click', () => {
 })
 
 
-openModalButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const modal = document.querySelector(button.dataset.modalTarget)
-        openModal(modal)
-    })
-})
 
-closeModalButtons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        e.preventDefault()
-        const modal = button.closest('.model')
-        closeModal(modal)
 
-    })
-})
+// openModalButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//         const modal = document.querySelector(button.dataset.modalTarget)
+//         openModal(modal)
+//     })
+// })
+
+// closeModalButtons.forEach(button => {
+//     button.addEventListener('click', (e) => {
+//         e.preventDefault()
+//         const modal = button.closest('.model')
+//         closeModal(modal)
+
+//     })
+// })
 
 
 
@@ -232,6 +231,12 @@ closeModalButtons.forEach(button => {
         // pop up userform
         const modal = document.getElementById('model')
         openModal(modal)
+        const closeModalButton = document.querySelector('[data-close-button]')
+        closeModalButton.addEventListener('click', (e) => {
+            e.preventDefault()
+            closeModal(modal)
+    
+        })
 
         //submit userform=> save tshirt and user(if not exist) to backend
 
@@ -294,8 +299,7 @@ closeModalButtons.forEach(button => {
                 let button = document.getElementById('button-1')
                 button.addEventListener('click', (e) => {
                     e.preventDefault()
-                    div.classList.remove('active')
-                    overlay.classList.remove('active')
+                    closeModal(div)
                     window.location.reload()
 
                 }
