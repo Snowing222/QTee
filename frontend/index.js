@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // Promise.all(observers)
-    // ,then(function(fonts) {
+    // .then(function(fonts) {
     //     fonts.forEach(function(font) {
     //       console.log(font + 'loaded');
     //     });
@@ -135,7 +135,31 @@ document.querySelector('button.btn.rect').addEventListener('click', () => {
     }));
 })
 
+let gallaryButton = document.getElementById('gallary')
+gallaryButton.addEventListener('click', () => {
+    fetchTshirts()
+    let gallary_container = document.getElementById('gallary_container')
+    openModal(gallary_container)
 
+    gallary_container.addEventListener('click', () => {
+        gallary_container.classList.remove('active')
+        overlay.classList.remove('active')
+    })
+
+})
+
+function fetchTshirts() {
+    fetch(`${BASE_URL}/tshirts`)
+        .then(resp => resp.json())
+        .then(json => displayTshirts(json))
+}
+
+function displayTshirts(json) {
+    for (const t of json) {
+        let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
+        tshirt.displayTshirt()
+    }
+}
 
 
 
@@ -146,7 +170,7 @@ document.querySelector('button.btn.rect').addEventListener('click', () => {
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const overlay = document.getElementById('overlay')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
-console.log(openModalButtons, closeModalButtons)
+
 
 
 function openModal(modal) {
@@ -181,6 +205,7 @@ closeModalButtons.forEach(button => {
         closeModal(modal)
 
     })
+})
 
 
 
@@ -262,7 +287,6 @@ closeModalButtons.forEach(button => {
                     <button data-close-button class='close-button' id='button-1'>&times;</button>
                 </div>
                 
-
                 `
 
                 body.appendChild(div)
@@ -285,34 +309,7 @@ closeModalButtons.forEach(button => {
 
 
 
-    let gallaryButton = document.getElementById('gallary')
-    gallaryButton.addEventListener('click', () => {
-        fetchTshirts()
-        let gallary_container = document.getElementById('gallary_container')
-        openModal(gallary_container)
-
-        gallary_container.addEventListener('click', () => {
-            gallary_container.classList.remove('active')
-            overlay.classList.remove('active')
-        })
-
-    })
-
-    function fetchTshirts() {
-        fetch(`${BASE_URL}/tshirts`)
-            .then(resp => resp.json())
-            .then(json => displayTshirts(json))
-    }
-
-    function displayTshirts(json) {
-        for (const t of json) {
-            let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
-            tshirt.displayTshirt()
-        }
-    }
-
-
-
+   
 
 
 
@@ -333,6 +330,4 @@ closeModalButtons.forEach(button => {
     // })
 
 
-
-})
 

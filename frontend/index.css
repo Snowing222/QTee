@@ -102,6 +102,9 @@
     pointer-events: none;
 
 }
+#overlay.active{
+    opacity:0.5
+}
 
 #gallary_container{
     position: absolute;
@@ -128,3 +131,4 @@ span{
     color: red;
     font-weight: bold;
 }
+
