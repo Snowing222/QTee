@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
             top: 50,
             fill: 'rgb(255,0,0)'
         })
-        canvas.add(rec).setActiveObject(rec);
+        canvas.add(rect).setActiveObject(rec);
     })
 
     let clearCanvasButton = document.getElementById('clearcanvas')
@@ -205,7 +205,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     overlay.addEventListener('click', () => {
-        debugger
         const modal = document.querySelector('.model.active')
         closeModal(modal)
     })
@@ -216,6 +215,8 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault()
 
         //save tshirt data
+        canvas.discardActiveObject().renderAll();
+
 
         let size = document.getElementById("tshirt-size").value
         let color = document.getElementById("tshirt-color").value
