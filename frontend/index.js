@@ -1,5 +1,3 @@
-const BASE_URL = 'http://localhost:3000'
-
 document.addEventListener('DOMContentLoaded', () => {
     //create canvas
     const initCanvas = (id) => {
@@ -13,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const canvas = initCanvas('canvas')
     canvas.renderAll()
-    console.log(canvas, canvas.isDrawingMode)
+
     //edit tshirt color
     let tshirtColor = document.getElementById("tshirt-color")
     tshirtColor.addEventListener('change', (e) => {
@@ -77,135 +75,140 @@ document.addEventListener('DOMContentLoaded', () => {
 
         select.addEventListener('change', (e) => {
             if (e.target.value !== 'Times New Roman') {
-                textbox.fontFamily = e.target.value
+                textbox.set('fontFamily', e.target.value)
                 canvas.requestRenderAll()
             }
         })
 
     }
 
+    let color = "#000000"
+    let activeObject = ""
+    document.getElementById('colorPicker').addEventListener('change',pickColor)
+
+    function pickColor(e){
+        color = e.target.value
+        activeObject = canvas.getActiveObject()
+        console.log(activeObject, activeObject.fill,activeObject.stroke)
+        if(activeObject.fill===null){
+            activeObject.set('stroke', color)
+        }else{
+           
+            activeObject.set('fill', color)
+        }
+        canvas.renderAll()
+    }
+
+
+
     document.getElementById('drawbutton').addEventListener('click', toggleMode)
 
     function toggleMode(e) {
-    if (e.target.innerText === "Switch To Dawing Mode") {
-        canvas.isDrawingMode = true
-        e.target.innerText = "Drawing Mode"
-        console.log(canvas, canvas.isDrawingMode)
+        if (e.target.innerText === "Switch To Drawing Mode") {
+            canvas.isDrawingMode = true
+            canvas.freeDrawingBrush.width = 10
+            e.target.innerText = "Drawing Mode"
 
-    } else {
-        canvas.isDrawingMode = false
-        e.target.innerText = "Switch To Dawing Mode"
-        console.log(canvas, canvas.isDrawingMode)
+        } else {
+            canvas.isDrawingMode = false
+            e.target.innerText = "Switch To Dawing Mode"
+        }
     }
-}
 
-//add shapes
-document.getElementById('addShape').addEventListener('click', (e) => {
-    document.querySelector('p.hidden.shape').classList.remove('hidden')
+    //add shapes
+    document.getElementById('addShape').addEventListener('click', (e) => {
+        document.querySelector('p.hidden.shape').classList.remove('hidden')
 
-})
-
-document.querySelector('button.btn.circle').addEventListener('click', () => {
-    canvas.add(new fabric.Circle({
-        radius: 40,
-        left: 50,
-        top: 50,
-        fill: 'rgb(0,255,0)',
-        opacity: 0.5
-    }));
-})
-
-document.querySelector('button.btn.triangle').addEventListener('click', () => {
-    canvas.add(new fabric.Triangle({
-        width: 50,
-        height: 40,
-        fill: 'blue',
-        left: 50,
-        top: 50
-    }));
-})
-
-document.querySelector('button.btn.rect').addEventListener('click', () => {
-    canvas.add(new fabric.Rect({
-        width: 50,
-        height: 50,
-        left: 50,
-        top: 50,
-        fill: 'rgb(255,0,0)'
-    }));
-})
-
-let gallaryButton = document.getElementById('gallary')
-gallaryButton.addEventListener('click', () => {
-    fetchTshirts()
-    let gallary_container = document.getElementById('gallary_container')
-    openModal(gallary_container)
-
-    gallary_container.addEventListener('click', () => {
-        gallary_container.classList.remove('active')
-        overlay.classList.remove('active')
     })
 
-})
+    document.querySelector('button.btn.circle').addEventListener('click', () => {
+        let circle = new fabric.Circle({
+            radius: 40,
+            left: 50,
+            top: 50,
+            fill: 'rgb(0,255,0)',
+            opacity: 0.5
+        })
+        canvas.add(circle).setActiveObject(circle);
+    })
 
-function fetchTshirts() {
-    fetch(`${BASE_URL}/tshirts`)
-        .then(resp => resp.json())
-        .then(json => displayTshirts(json))
-}
+    document.querySelector('button.btn.triangle').addEventListener('click', () => {
+        let triangle = new fabric.Triangle({
+            width: 50,
+            height: 40,
+            fill: 'blue',
+            left: 50,
+            top: 50
+        })
+        canvas.add(triangle).setActiveObject(triangle);
+    })
 
-function displayTshirts(json) {
-    for (const t of json) {
-        let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
-        tshirt.displayTshirt()
+    document.querySelector('button.btn.rect').addEventListener('click', () => {
+        let rect = new fabric.Rect({
+            width: 50,
+            height: 50,
+            left: 50,
+            top: 50,
+            fill: 'rgb(255,0,0)'
+        })
+        canvas.add(rec).setActiveObject(rec);
+    })
+
+    let clearCanvasButton = document.getElementById('clearcanvas')
+    clearCanvasButton.addEventListener('click', (e)=>{
+        e.preventDefault()
+        canvas.clear()
+
+    })
+
+    let gallaryButton = document.getElementById('gallary')
+    gallaryButton.addEventListener('click', () => {
+        fetchTshirts()
+        let gallary_container = document.getElementById('gallary_container')
+        openModal(gallary_container)
+
+        gallary_container.addEventListener('click', () => {
+            gallary_container.classList.remove('active')
+            overlay.classList.remove('active')
+        })
+
+    })
+
+    function fetchTshirts() {
+        fetch('http://localhost:3000/tshirts')
+            .then(resp => resp.json())
+            .then(json => displayTshirts(json))
     }
-}
+
+    function displayTshirts(json) {
+        for (const t of json) {
+            let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
+            tshirt.displayTshirt()
+        }
+    }
 
 
 
-})
+    //submit Tshirt Form
+    const overlay = document.getElementById('overlay')
 
+    function openModal(modal) {
+        if (modal == null) return
+        modal.classList.add('active')
+        overlay.classList.add('active')
+    }
 
+    function closeModal(modal) {
+        if (modal == null) return
+        modal.classList.remove('active')
+        overlay.classList.remove('active')
+    }
 
-// const openModalButtons = document.querySelectorAll('[data-modal-target]')
-const overlay = document.getElementById('overlay')
-
-function openModal(modal) {
-    if (modal == null) return
-    modal.classList.add('active')
-    overlay.classList.add('active')  
-}
-
-function closeModal(modal) {
-    if (modal == null) return
-    modal.classList.remove('active')
-    overlay.classList.remove('active')
-}
-
-overlay.addEventListener('click', () => {
-    const modal = document.querySelector('.model.active')
-    closeModal(modal)
-})
-
-
-
-
-// openModalButtons.forEach(button => {
-//     button.addEventListener('click', () => {
-//         const modal = document.querySelector(button.dataset.modalTarget)
-//         openModal(modal)
-//     })
-// })
-
-// closeModalButtons.forEach(button => {
-//     button.addEventListener('click', (e) => {
-//         e.preventDefault()
-//         const modal = button.closest('.model')
-//         closeModal(modal)
-
-//     })
-// })
-
+    overlay.addEventListener('click', () => {
+        debugger
+        const modal = document.querySelector('.model.active')
+        closeModal(modal)
+    })
 
 
     let tshirtForm = document.getElementById("tshirtForm")
@@ -235,7 +238,7 @@ overlay.addEventListener('click', () => {
         closeModalButton.addEventListener('click', (e) => {
             e.preventDefault()
             closeModal(modal)
-    
+
         })
 
         //submit userform=> save tshirt and user(if not exist) to backend
@@ -268,7 +271,7 @@ overlay.addEventListener('click', () => {
                 body: JSON.stringify(userformData)
             };
 
-            fetch(`${BASE_URL}/users`, configObj)
+            fetch('http://localhost:3000/users', configObj)
                 .then(resp => resp.json())
                 .then(json => confirmSaved(json));
 
@@ -312,8 +315,15 @@ overlay.addEventListener('click', () => {
     })
 
 
+})
 
-   
+
+
+
+
+
+
+
 
 
 
