@@ -133,6 +133,11 @@
 
 }
 
+button{
+    border: none;
+    background-color: transparent;
+}
+
 
 
 /* button styleing */
