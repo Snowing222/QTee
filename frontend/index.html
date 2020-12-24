@@ -98,7 +98,30 @@
             <div id='tshirt-design-wrapper' class="col">
 
                 <form id="tshirtForm">
-                    <div class="controls">
+
+                  <div id='selectSizeandColorButton'>  
+
+                    <a href="javascript:;">
+                        <svg class="icon-arrow before">
+                            <use xlink:href="#arrow"></use>
+                        </svg>
+                        <span class="label">Select Your Tshirt</span>
+                        <svg class="icon-arrow after">
+                            <use xlink:href="#arrow"></use>
+                        </svg>
+                    </a>
+            
+                    <svg style="display: none;">
+                        <defs>
+                            <symbol id="arrow" viewBox="0 0 35 15">
+                                <title>Arrow</title>
+                                <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
+                            </symbol>
+                        </defs>
+                    </svg>
+
+                </div>
+                    <div class="controls selectTshirt hidden">
                         <p>
                             <label for="tshirt-size">Select a size:</label>
                             <select name="tshirt-size" id="tshirt-size">
@@ -111,7 +134,7 @@
                         </p>
                     </div>
 
-                    <div class="controls">
+                    <div class="controls selectTshirt hidden">
                         <p>
                             <label for="tshirt-color">T-Shirt Color:</label>
                             <select id="tshirt-color">
@@ -123,28 +146,50 @@
                             </select>
                         </p>
                     </div>
+                    <br><br>
+                    <div id='designTshirtButton' class='hidden'>  
 
+                        <a href="javascript:;">
+                            <svg class="icon-arrow before">
+                                <use xlink:href="#arrow"></use>
+                            </svg>
+                            <span class="label">Customize Your Tshirt</span>
+                            <svg class="icon-arrow after">
+                                <use xlink:href="#arrow"></use>
+                            </svg>
+                        </a>
+                
+                        <svg style="display: none;">
+                            <defs>
+                                <symbol id="arrow" viewBox="0 0 35 15">
+                                    <title>Arrow</title>
+                                    <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
+                                </symbol>
+                            </defs>
+                        </svg>
+    
+                    </div>
                     <br>
 
-                    <div class="controls" id="colorPickerContainer">
+                    <div class="controls designTshirt hidden" id="colorPickerContainer">
                         <p>
                             Color: <input id='colorPicker' value="#000000" data-jscolor="">
                         </p>
-                     </div>
+                    </div>
 
 
 
 
-                    <div class="controls">
+                    <div class="controls designTshirt hidden">
                         <p>
-                            <button type="button" id="addTextButton">Add Text</button>
+                            <button type="button" id="addTextButton">&#43; Add Text</button>
                         <p class='hidden font'>Select Font <select id="font-family"></select></p>
                         </p>
                     </div>
 
-                    <div class="controls">
+                    <div class="controls designTshirt hidden">
                         <p>
-                            <button type="button" id="addShape">Add Shape</button>
+                            <button type="button" id="addShape"> &#43; Add Shape</button>
                         <p class='hidden shape'>
                             <button type="button" class="btn circle">Circle</button>
                             <button type="button" class="btn triangle">Triangle</button>
@@ -157,7 +202,7 @@
 
 
 
-                    <div class="controls">
+                    <div class="controls designTshirt hidden">
                         <p>
                             <button type="button" id="drawbutton">Switch To Drawing Mode</button>
 
@@ -169,11 +214,17 @@
                             <button type="button" id="uploadimg">Upload Image</button>
                         </p>
                     </div> -->
+           
+                    <div class="controls designTshirt hidden">
+                        <p><button data-modal-target='#model' id="done">Done!</button></p>
+                    </div>
 
-                    <div class="controls">
-                        <p><button data-modal-target='#model'>Done!</button></p>
+                    <div class = 'controls designTshirt hidden'>
+                        <button id="clearcanvas">Clear</button>
                     </div>
                 </form>
+
+              
 
                 <div class='model' id='model'>
                     <div class="model-header">
@@ -198,9 +249,7 @@
 
                 <div id='overlay'></div>
 
-                <div id="clearcanvas">
-                    <button>Clear Canvas</button>
-                </div>
+               
 
 
 

@@ -326,7 +326,7 @@ var jsc = {
 				obj[jsc.dataProp] = {}; // create data object
 			} else {
 				return undefined; // no value to return
-			}
+			}d
 		}
 		var data = obj[jsc.dataProp];
 

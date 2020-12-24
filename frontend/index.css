@@ -291,3 +291,14 @@ body {
       font-size: 100px;
       color: pink;
   }
+ 
+  #controlDesign{
+      display: inline-block;
+  }
+
+  #done, #clearcanvas{
+      border-radius: 50%;
+      background: linear-gradient(to bottom right, #ff3399 0%, #9900ff 100%)
+    }
+
+

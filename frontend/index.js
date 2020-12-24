@@ -10,7 +10,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     const canvas = initCanvas('canvas')
-    canvas.renderAll()
+    canvas.renderAll()  
+    
+    let button1 = document.querySelector('#selectSizeandColorButton>a')
+    let button2 = document.querySelector('#designTshirtButton')
+    button1.addEventListener('click',(e)=>{
+        e.preventDefault()
+        let divs = document.querySelectorAll('.controls.selectTshirt.hidden')
+        divs.forEach((div)=>{
+            div.classList.remove('hidden')
+        })
+
+      
+        button2.classList.remove('hidden')  
+    })
+
+    button2.addEventListener('click',(e)=>{
+        e.preventDefault()
+        let divs = document.querySelectorAll('.controls.designTshirt.hidden')
+        divs.forEach((div)=>{
+            div.classList.remove('hidden')
+        })
+        
+    })
 
     //edit tshirt color
     let tshirtColor = document.getElementById("tshirt-color")
