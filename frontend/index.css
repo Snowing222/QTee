@@ -301,9 +301,14 @@ body {
       display: inline-block;
   }
 
-  #done, #clearcanvas{
+  #done{
       border-radius: 50%;
-      background: linear-gradient(to bottom right, #ff3399 0%, #9900ff 100%)
+      background: linear-gradient(to top right, #0000ff 0%, #3399ff 100%)
     }
+
+#clearcanvas{
+    border-radius: 50%;
+    background: linear-gradient(to top right, #ff66ff 0%, #cc0066 100%);
+  }
 
 

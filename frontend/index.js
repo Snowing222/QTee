@@ -127,11 +127,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function toggleMode(e) {
         if (e.target.innerText === "Switch To Drawing Mode") {
+            debugger
             canvas.isDrawingMode = true
             canvas.freeDrawingBrush.width = 10
             e.target.innerText = "Drawing Mode"
 
         } else {
+            debugger
             canvas.isDrawingMode = false
             e.target.innerText = "Switch To Dawing Mode"
         }
