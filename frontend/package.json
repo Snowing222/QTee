@@ -12,6 +12,7 @@
   },
   "author": "",
   "license": "ISC",
+
   "dependencies": {
     "dom-to-image": "^2.6.0",
     "fontfaceobserver": "^2.1.0",

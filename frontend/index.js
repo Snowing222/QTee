@@ -7,11 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
         })
     }
 
-
-
     const canvas = initCanvas('canvas')
     canvas.renderAll()  
     
+    //add clickevent to button 1=>show size color option and button 2
     let button1 = document.querySelector('#selectSizeandColorButton>a')
     let button2 = document.querySelector('#designTshirtButton')
     button1.addEventListener('click',(e)=>{
@@ -25,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button2.classList.remove('hidden')  
     })
 
+    //add clickevent to button 2=> show custimize option
+
     button2.addEventListener('click',(e)=>{
         e.preventDefault()
         let divs = document.querySelectorAll('.controls.designTshirt.hidden')
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //edit tshirt color
     let tshirtColor = document.getElementById("tshirt-color")
-    tshirtColor.addEventListener('change', (e) => {
+    tshirtColor.addEventListener('change', () => {
         document.getElementById("tshirt-backgroundpicture").style.backgroundColor = tshirtColor.value
     })
 
@@ -75,12 +76,16 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addTextButton').addEventListener('click', addTextBox)
 
     function addTextBox() {
+        let textColor = (tshirtColor.value === "#000" ? "#FFFFFF" : "#000000")
         let textbox = new fabric.Textbox('Lorum ipsum dolor sit amet', {
             left: 50,
             top: 50,
             width: 150,
-            fontSize: 20
+            fontSize: 20,
+            fill: textColor
+            // objectCaching: false
         });
+       
 
         canvas.add(textbox).setActiveObject(textbox);
 
@@ -103,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
 
     }
-
-    let color = "#000000"
+    // color picker eventlistener to change active object color
+    let color =  "#000000"
     let activeObject = ""
     document.getElementById('colorPicker').addEventListener('change',pickColor)
 
@@ -122,29 +127,30 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
+    //toggle drawing mode=>set isDrawingMode = true
     document.getElementById('drawbutton').addEventListener('click', toggleMode)
 
     function toggleMode(e) {
         if (e.target.innerText === "Switch To Drawing Mode") {
-            debugger
+
             canvas.isDrawingMode = true
             canvas.freeDrawingBrush.width = 10
             e.target.innerText = "Drawing Mode"
 
         } else {
-            debugger
+        
             canvas.isDrawingMode = false
             e.target.innerText = "Switch To Dawing Mode"
         }
     }
 
-    //add shapes
+    //add shapes=>show shape option
     document.getElementById('addShape').addEventListener('click', (e) => {
         document.querySelector('p.hidden.shape').classList.remove('hidden')
 
     })
-
+    
+    //click add circle
     document.querySelector('button.btn.circle').addEventListener('click', () => {
         let circle = new fabric.Circle({
             radius: 40,
@@ -156,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.add(circle).setActiveObject(circle);
     })
 
+    //click add triangle
     document.querySelector('button.btn.triangle').addEventListener('click', () => {
         let triangle = new fabric.Triangle({
             width: 50,
@@ -166,7 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         canvas.add(triangle).setActiveObject(triangle);
     })
-
+    
+    //click add rect
     document.querySelector('button.btn.rect').addEventListener('click', () => {
         let rect = new fabric.Rect({
             width: 50,
@@ -178,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.add(rect).setActiveObject(rec);
     })
 
+    //clear canvas button
     let clearCanvasButton = document.getElementById('clearcanvas')
     clearCanvasButton.addEventListener('click', (e)=>{
         e.preventDefault()
@@ -185,6 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     })
 
+
+    //click gallary event listener=>show gallary container/display all tshirtsf
     let gallaryButton = document.getElementById('gallary')
     gallaryButton.addEventListener('click', () => {
         fetchTshirts()
@@ -217,6 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const overlay = document.getElementById('overlay')
 
     function openModal(modal) {
+
         if (modal == null) return
         modal.classList.add('active')
         overlay.classList.add('active')
@@ -237,9 +249,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let tshirtForm = document.getElementById("tshirtForm")
     tshirtForm.addEventListener('submit', (e) => {
         e.preventDefault()
-
+   
         //save tshirt data
         canvas.discardActiveObject().renderAll();
+
 
 
         let size = document.getElementById("tshirt-size").value
@@ -352,21 +365,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-    // let mousePressed = false
-    // canvas.on('mouse:move',(event)=>{
-
-    // })
-
-    // canvas.on('mouse:down',(event)=>{
-    //     console.log('press the mouse')
-
-    // })
-
-    // canvas.on('mouse:up',(event)=>{
-    //     console.log("release")
-
-    // })
 
 
 
