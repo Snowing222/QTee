@@ -24,7 +24,7 @@ class UsersController < ApplicationController
  
     if @user
       # render json: @user, status: :created, location: @user
-      render json: {user_email: @user.email, tshirt_size: @tshirt.size, tshirt_color:@tshirt.color, tshirt_img:@tshirt.img_src }
+      render json: {userEmail: @user.email, tshirtSize: @tshirt.size, tshirtColor:@tshirt.color, tshirtImg:@tshirt.img_src }
     else
       render json: @user.errors_entity
     end

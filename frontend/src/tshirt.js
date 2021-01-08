@@ -1,10 +1,10 @@
 class Tshirt{
     constructor(id,size, color, img_src, user_id, likes){
         this.id = id   
-        this.user_id = user_id
+        this.userId = user_id
         this.size = size
         this.color = color
-        this.img_src = img_src
+        this.imgSrc = img_src
         this.likes = likes  
     
     
@@ -17,7 +17,7 @@ class Tshirt{
         let div =document.createElement('div')
         div.classList.add('card')
         let img =document.createElement('img')
-        img.src  = `${this.img_src}`
+        img.src  = `${this.imgSrc}`
         img.id = `image${this.id}`
         img.width = "208"
         img.height = "258"

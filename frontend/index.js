@@ -328,12 +328,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML =
                     `
                 <div class="model-header">
-                    <div class="title">Hi ${json.user_email} <br>
+                    <div class="title">Hi ${json.useEmail} <br>
                        Your Tshirt is saved! <br>
-                       <img src = ${json.tshirt_img} width = '308px' height='358px'>
+                       <img src = ${json.tshirtImg} width = '308px' height='358px'>
                        <div class = "tshirt_info">
-                         <p> size: ${json.tshirt_size}</p>
-                         <p> color: ${json.tshirt_color}</p>
+                         <p> size: ${json.tshirtSize}</p>
+                         <p> color: ${json.tshirtColor}</p>
                        </div>
                     </div>
                     <button data-close-button class='close-button' id='button-1'>&times;</button>
