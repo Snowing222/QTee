@@ -46,6 +46,6 @@ class TshirtsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def tshirt_params
-      params.require(:tshirt).permit(:img_src, :color, :size)
+      params.require(:tshirt).permit(:img_src, :color, :size, :likes)
     end
 end

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2020_12_17_173259) do
     t.string "color"
     t.string "size"
     t.integer "user_id"
+    t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_tshirts_on_user_id"

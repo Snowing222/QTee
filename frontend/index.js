@@ -202,9 +202,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let gallary_container = document.getElementById('gallary_container')
         openModal(gallary_container)
 
-        gallary_container.addEventListener('click', () => {
+        document.getElementById('gallaryCloseButton').addEventListener('click', () => {
             gallary_container.classList.remove('active')
             overlay.classList.remove('active')
+            gallary_container.innerHTML=
+            `
+            <button id='gallaryCloseButton' data-close-button class='close-button'>&times;</button>
+            `
         })
 
     })
@@ -214,17 +218,18 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(resp => resp.json())
             .then(json => displayTshirts(json))
     }
-
+    
     function displayTshirts(json) {
         for (const t of json) {
-            let tshirt = new Tshirt(t.size, t.color, t.img_src, t.user_id)
+            let tshirt = new Tshirt(t.id, t.size, t.color, t.img_src, t.user_id, t.likes)
             tshirt.displayTshirt()
-        }
+          }
     }
+ 
 
 
 
-    //submit Tshirt Form
+    //submit Tshirt Form(1)
     const overlay = document.getElementById('overlay')
 
     function openModal(modal) {
@@ -279,7 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         })
 
-        //submit userform=> save tshirt and user(if not exist) to backend
+        //submit userform=> save tshirt and user(if not exist) to backend(3)
 
         let userForm = document.getElementById('userForm')
 
@@ -296,8 +301,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 tshirts_attributes: {
                     size: size,
                     color: color,
-                    img_src: img_src
-                }
+                    img_src: img_src,
+                    likes: 0                }
             }
 
             let configObj = {
@@ -312,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch('http://localhost:3000/users', configObj)
                 .then(resp => resp.json())
                 .then(json => confirmSaved(json));
+            //use returned json to create confirmation modal
 
             function confirmSaved(json) {
                 let div = document.createElement('div')

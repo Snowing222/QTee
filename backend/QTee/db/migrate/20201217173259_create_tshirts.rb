@@ -5,6 +5,7 @@ class CreateTshirts < ActiveRecord::Migration[6.0]
       t.string :color
       t.string :size
       t.belongs_to :user
+      t.integer :likes
 
       t.timestamps
     end

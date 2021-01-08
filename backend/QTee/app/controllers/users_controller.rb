@@ -16,15 +16,17 @@ class UsersController < ApplicationController
   # POST /users
   def create
     
-    
     @user = User.find_or_create_by(email: user_params[:email])
-    @tshirt = @user.tshirts.create(size: user_params[:tshirts_attributes][:size], color: user_params[:tshirts_attributes][:color], img_src: user_params[:tshirts_attributes][:img_src])
+    @tshirt = @user.tshirts.create(size: user_params[:tshirts_attributes][:size], 
+                                   color: user_params[:tshirts_attributes][:color], 
+                                   img_src: user_params[:tshirts_attributes][:img_src],
+                                   likes: user_params[:tshirts_attributes][:likes])
  
     if @user
       # render json: @user, status: :created, location: @user
-      render json: { user_email: @user.email, tshirt_size: @tshirt.size, tshirt_color:@tshirt.color, tshirt_img:@tshirt.img_src }
+      render json: {user_email: @user.email, tshirt_size: @tshirt.size, tshirt_color:@tshirt.color, tshirt_img:@tshirt.img_src }
     else
-      render json: @user.errorse_entity
+      render json: @user.errors_entity
     end
   end
 
@@ -50,6 +52,6 @@ class UsersController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_params
-      params.require(:user).permit(:email,  tshirts_attributes: [:size, :color, :img_src])
+      params.require(:user).permit(:email,  tshirts_attributes: [:size, :color, :img_src, :likes])
     end
 end
