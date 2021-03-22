@@ -328,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 div.innerHTML =
                     `
                 <div class="model-header">
-                    <div class="title">Hi ${json.useEmail} <br>
+                    <div class="title">Hi ${json.userEmail} <br>
                        Your Tshirt is saved! <br>
                        <img src = ${json.tshirtImg} width = '308px' height='358px'>
                        <div class = "tshirt_info">
