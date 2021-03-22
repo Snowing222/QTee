@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 2020_12_17_173259) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "tshirts", force: :cascade do |t|
     t.string "img_src"
     t.string "color"
     t.string "size"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.integer "likes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
