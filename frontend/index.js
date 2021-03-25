@@ -271,12 +271,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // pop up userform
     const modal = document.getElementById("model");
     openModal(modal);
-    const closeModalButton = document.querySelector("[data-close-button]");
-    console.log(closeModalButton)
-    closeModalButton.addEventListener("click", (e) => {
+    const closeModalButtons = document.querySelectorAll("[data-close-button]");
+    console.log(closeModalButtons)
+    closeModalButtons.forEach(button=>button.addEventListener("click", (e) => {
       e.preventDefault();
       closeModal(modal);
-    });
+    }))
+    
+     
 
     //submit userform=> save tshirt and user(if not exist) to backend(3)
 
