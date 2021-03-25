@@ -48,7 +48,7 @@ class Tshirt{
               body: JSON.stringify(userData)
             }
 
-            fetch(`http://localhost:3000/tshirts/${this.id}`, configObj).then(resp=> resp.json()).then(json=>{
+            fetch(`https://qtee-api.herokuapp.com/tshirts/${this.id}`, configObj).then(resp=> resp.json()).then(json=>{
             span.innerText = likes + " likes" 
   })
 
