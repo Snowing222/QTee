@@ -30,10 +30,9 @@
 
     <div class="container">
         <div class="row justify-content-evenly">
-
+            
             <div id="tshirt-div" class="col-8">
               <img id="tshirt-backgroundpicture" src="tshirt.png" width="700px" />
-
                 <div id="drawingArea" class="drawing-area">
                     <div class="canvas-container">
                         <canvas id="canvas"></canvas>
@@ -43,31 +42,28 @@
 
 
             <div id='tshirt-design-wrapper' class="col">
-
                 <form id="tshirtForm">
-
-                  <div id='selectSizeandColorButton'>  
-
-                    <a href="javascript:;">
-                        <svg class="icon-arrow before">
-                            <use xlink:href="#arrow"></use>
-                        </svg>
-                        <span class="label">Select Your Tshirt</span>
-                        <svg class="icon-arrow after">
-                            <use xlink:href="#arrow"></use>
-                        </svg>
-                    </a>
+                    <div id='selectSizeandColorButton'>  
+                        <a href="javascript:;">
+                            <svg class="icon-arrow before">
+                                <use xlink:href="#arrow"></use>
+                            </svg>
+                            <span class="label">Select Your Tshirt</span>
+                            <svg class="icon-arrow after">
+                                <use xlink:href="#arrow"></use>
+                            </svg>
+                        </a>
             
-                    <svg style="display: none;">
-                        <defs>
-                            <symbol id="arrow" viewBox="0 0 35 15">
-                                <title>Arrow</title>
-                                <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
-                            </symbol>
-                        </defs>
-                    </svg>
+                        <svg style="display: none;">
+                            <defs>
+                                <symbol id="arrow" viewBox="0 0 35 15">
+                                    <title>Arrow</title>
+                                    <path d="M27.172 5L25 2.828 27.828 0 34.9 7.071l-7.07 7.071L25 11.314 27.314 9H0V5h27.172z " />
+                                </symbol>
+                            </defs>
+                        </svg>
+                    </div>
 
-                </div>
                 <br>
                     <div class="controls selectTshirt hidden">
                         <p>
@@ -94,9 +90,10 @@
                             </select>
                         </p>
                     </div>
-                    <br><br>
-                    <div id='designTshirtButton' class='hidden'>  
 
+                    <br><br>
+
+                    <div id='designTshirtButton' class='hidden'>  
                         <a href="javascript:;">
                             <svg class="icon-arrow before">
                                 <use xlink:href="#arrow"></use>
@@ -115,8 +112,8 @@
                                 </symbol>
                             </defs>
                         </svg>
-    
                     </div>
+
                     <br>
 
                     <div class="controls designTshirt hidden" id="colorPickerContainer">
@@ -191,16 +188,10 @@
                             </p>
                         </form>
                     </div>
-
                 </div>
 
 
                 <div id='overlay'></div>
-
-               
-
-
-
             </div>
         </div>
     </div>
